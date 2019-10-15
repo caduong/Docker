@@ -39,7 +39,7 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 	docker run -ti ubuntu bash -c "sleep 3; echo job finished" --rm 
 	
-	docker run -ti -d "name container"  -->  run in the backgroud
+	docker run -ti -d "name of images"  -->  run in the backgroud
 
 	docker attach "name or id of container" --> access into container ruuning in the backgroud.
 
@@ -81,3 +81,38 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 	docker run --cpu-period=4000 --cpu-quota=20000 ubuntu bash
 		. If 1 CPU, container occupy 50% CPU each 40ms.
+
+* Network in container.
+	docker run --rm -ti -p 111:111 -p 222:222 --name reply ubuntu:14.04 bash
+		. Open port internal 111 and external 111 ( -p "internal":"external")
+		. when receiver data forward data form port 222 in container and port 222 out container.
+	nc -l 111 | nc -l 111
+
+	docker run -p 111:222/upd 
+		. Open port UDP.
+
+* Communcation container
+	docker run -ti --rm --name server ubuntu:14.04 bash	
+		. not port.
+	
+	nc -l 111
+	// ----------------------------------------------------------------------------
+	docker run --rm -ti --link server --name client ubuntu:14.04 bash
+		. "--link" connect from server.
+
+	nc server 111
+	=> High risk because if a container change name or stop -> connect fail. 
+
+* Communication dynamic in container.
+	docker network create "name network" --> create a network
+		. docker network create xfinty
+
+	docker run --rm -ti --net=xfinty --name server ubuntu:14.04 bash
+
+	nc -l 111
+
+	// --------------------------------------------------------------------------------------
+
+	docker run --rm -ti --link server --net=xfinty --name client ubuntu:14.04 bash
+
+	nc server 111
