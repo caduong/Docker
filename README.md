@@ -1,7 +1,7 @@
 # Docker
 
 # Install docker 
-https://docs.docker.com/install/linux/docker-ce/ubuntu/
+	https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 --------------------------------------------------------------------
 
@@ -36,25 +36,31 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 --------------------------------------------------------------------
 
 # Process in Container
-	docker run -ti --rm ubuntu sleep 3 --> "rm": container will remove after when stop.
+	docker run -ti --rm ubuntu sleep 3 
+		Note: "rm": container will remove after when stop.
 
 	docker run -ti ubuntu bash -c "sleep 3; echo job finished" --rm 
 	
-	docker run -ti -d "name of images"  -->  run in the backgroud
+	docker run -ti -d "name of images" 
+		Note: run in the backgroud.
 
-	docker attach "name or id of container" --> access into container ruuning in the backgroud.
+	docker attach "name or id of container" 
+		Note: access into container ruuning in the backgroud.
+			  use " Ctrl + p" or "Ctrl + q" --> exit container but it running in the backgroud.
+	
 
-	use " Ctrl + p" or "Ctrl + q" --> exit container but it running in the backgroud.
-
-	docker exec -ti "name of container running" --> multi access into a container. 
+	docker exec -ti "name of container running"  
+			Note: multi access into a container. 
 --------------------------------------------------------------------
 
 # Command line Docker container.
 	docker create -ti ubuntu bash 
 
-	docker ps -a  --> check docker created.
+	docker ps -a  
+		Note: check docker created.
 
-	docker start -ai "container ID". --> run a container created.
+	docker start -ai "container ID". 
+		Note: run a container created.
 
 	docker stop "ID container" 
 
@@ -63,12 +69,14 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 	docker cp "name file" "patch" 
 		ex: docker cp ebook.txt sharp_bell:/root/ebook.txt
 	
-	docker inspect "ID container" --> all info of container. 
+	docker inspect "ID container"  
+		Note: get all info of container. 
 
-	docker inspect "ID container" | grep IPAddr  --> "IPAddr" is keywork find in all info of container.
+	docker inspect "ID container" | grep IPAddr   
+		Note: "IPAddr" is keywork find in all info of container.
 
 	docker rm "ID or name of container" 
-		. Note: Must stop container before remove. 
+		Note: Must stop container before remove. 
 
 	docker kill "ID or name of container" 
 --------------------------------------------------------------------
@@ -78,18 +86,19 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 		
 	docker logs "name or ID of container"
 
-	docker run --memory "memory limit" ubuntu bash  --> limit memory for a container.
+	docker run --memory "memory limit" ubuntu bash   
+		Note:limit memory for a container.
 
 	docker run --cpu-shares=" % CPU" ubuntu bash
 
 	docker run --cpu-period=4000 --cpu-quota=20000 ubuntu bash
-		. If 1 CPU, container occupy 50% CPU each 40ms.
+		Note: If 1 CPU, container occupy 50% CPU each 40ms.
 --------------------------------------------------------------------
 
 # Network in container.
 	docker run --rm -ti -p 111:111 -p 222:222 --name reply ubuntu:14.04 bash
-		. Open port internal 111 and external 111 ( -p "internal":"external")
-		. when receiver data forward data form port 222 in container and port 222 out container.
+		Note: Open port internal 111 and external 111 ( -p "internal":"external")
+			  when receiver data forward data form port 222 in container and port 222 out container.
 	nc -l 111 | nc -l 111
 
 	docker run -p 111:222/upd 
@@ -98,26 +107,28 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 # Communcation container
 	docker run -ti --rm --name server ubuntu:14.04 bash	
-		. not port.
+		Note: not port.
 	
 	nc -l 111
 	----------------------------------------------------------------------------
 	docker run --rm -ti --link server --name client ubuntu:14.04 bash
-		. "--link" connect from server.
+		Note: "--link" connect from server.
 
 	nc server 111
+
 	=> High risk because if a container change name or stop -> connect fail. 
 --------------------------------------------------------------------
 
 # Communication dynamic in container.
-	docker network create "name network" --> create a network
-		. docker network create xfinty
+	docker network create "name network"  
+		Note: create a network.
+		ex: docker network create xfinty
 
 	docker run --rm -ti --net=xfinty --name server ubuntu:14.04 bash
 	
 	nc -l 111
 	nc -vlkp 8080
-
+		Note: Open port listen is 111 or 8080.
 	--------------------------------------------------------------------------------------
 
 	docker run --rm -ti --link server --net=xfinty --name client ubuntu:14.04 bash
