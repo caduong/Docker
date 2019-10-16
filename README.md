@@ -108,8 +108,9 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 		. docker network create xfinty
 
 	docker run --rm -ti --net=xfinty --name server ubuntu:14.04 bash
-
+	
 	nc -l 111
+	nc -vlkp 8080
 
 	// --------------------------------------------------------------------------------------
 
