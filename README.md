@@ -1,22 +1,23 @@
 # Docker
 
-* Install docker 
+# Install docker 
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
-----------------------------------
+--------------------------------------------------------------------
 
-* Check images: 
+# Check images: 
 	docker images -> check images
------------------------------------
-* Work a image
+---------------------------------------------------------------------
+
+# Work a image
 	docker run -ti ubuntu:latest bash
 	pwd --> check current location
 	cat /etc/lsb-release --> check info OS running images  
 	docker ps  --> check container running
 	touch "namefile"  --> create a file.
-----------------------------------
+--------------------------------------------------------------------
 
-* loop Docker 
+# Loop Docker 
 	1. Run image
 		docker run -ti ubuntu bash
 	2. custom components
@@ -32,9 +33,9 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 	7. Change name repository 
 		docker tag "ID" "name need change" -->
 	8. Check again and run .
-----------------------------------
+--------------------------------------------------------------------
 
-* Process in Container
+# Process in Container
 	docker run -ti --rm ubuntu sleep 3 --> "rm": container will remove after when stop.
 
 	docker run -ti ubuntu bash -c "sleep 3; echo job finished" --rm 
@@ -46,8 +47,9 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 	use " Ctrl + p" or "Ctrl + q" --> exit container but it running in the backgroud.
 
 	docker exec -ti "name of container running" --> multi access into a container. 
+--------------------------------------------------------------------
 
-* Command line Docker container.
+# Command line Docker container.
 	docker create -ti ubuntu bash 
 
 	docker ps -a  --> check docker created.
@@ -63,14 +65,15 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 	
 	docker inspect "ID container" --> all info of container. 
 
-		docker inspect "ID container" | grep IPAddr  --> "IPAddr" is keywork find in all info of container.
+	docker inspect "ID container" | grep IPAddr  --> "IPAddr" is keywork find in all info of container.
 
 	docker rm "ID or name of container" 
 		. Note: Must stop container before remove. 
 
 	docker kill "ID or name of container" 
+--------------------------------------------------------------------
 
-* Manage container.
+# Manage container.
 	docker run --name "name for container" -d ubuntu bash -c "cat /etc/sysctl.conf"
 		
 	docker logs "name or ID of container"
@@ -81,8 +84,9 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 	docker run --cpu-period=4000 --cpu-quota=20000 ubuntu bash
 		. If 1 CPU, container occupy 50% CPU each 40ms.
+--------------------------------------------------------------------
 
-* Network in container.
+# Network in container.
 	docker run --rm -ti -p 111:111 -p 222:222 --name reply ubuntu:14.04 bash
 		. Open port internal 111 and external 111 ( -p "internal":"external")
 		. when receiver data forward data form port 222 in container and port 222 out container.
@@ -90,20 +94,22 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 	docker run -p 111:222/upd 
 		. Open port UDP.
+--------------------------------------------------------------------
 
-* Communcation container
+# Communcation container
 	docker run -ti --rm --name server ubuntu:14.04 bash	
 		. not port.
 	
 	nc -l 111
-	// ----------------------------------------------------------------------------
+	----------------------------------------------------------------------------
 	docker run --rm -ti --link server --name client ubuntu:14.04 bash
 		. "--link" connect from server.
 
 	nc server 111
 	=> High risk because if a container change name or stop -> connect fail. 
+--------------------------------------------------------------------
 
-* Communication dynamic in container.
+# Communication dynamic in container.
 	docker network create "name network" --> create a network
 		. docker network create xfinty
 
@@ -112,7 +118,7 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 	nc -l 111
 	nc -vlkp 8080
 
-	// --------------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------------
 
 	docker run --rm -ti --link server --net=xfinty --name client ubuntu:14.04 bash
 
