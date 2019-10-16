@@ -134,3 +134,12 @@
 	docker run --rm -ti --link server --net=xfinty --name client ubuntu:14.04 bash
 
 	nc server 111
+--------------------------------------------------------------------
+
+# Docker registry
+	docker search "option" 
+		ex: docker search ubuntu  
+	docker login 
+	docker pull "name images"
+	docker push caduong/image-1:v1.0
+	
