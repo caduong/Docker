@@ -142,4 +142,24 @@
 	docker login 
 	docker pull "name images"
 	docker push caduong/image-1:v1.0
-	
+--------------------------------------------------------------------
+
+# Manage image
+	docker images 
+		Note: List all images have in PC.
+
+	docker commit "ID container" "name need change"
+		Note: Change name when commit  
+			  Can add tag for container when commit, here is EX: docker commit d5388hhjdf8 ubuntu-custom-1:v1.0	
+	Rull when set name
+		registry.repo.com:port/organization/image-name:version-tag
+--------------------------------------------------------------------
+
+# import and export images
+	1.Compress images
+		docker save -o backup-images.tar.gz fedora:latest debian hello-world
+			Note: "-o": output 
+
+	2.Decompress images
+		docker load -i backup-images.tar.gz
+			Note: "-i": input
