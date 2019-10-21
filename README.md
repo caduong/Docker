@@ -185,4 +185,54 @@
 --------------------------------------------------------------------
 
 # Build Dockerfile
-	
+	1.Build images form dockerfile.
+		docker build -t "name image after build" .
+			Note: "." find file dockerfile at folder current. 
+				  "-t" tag.
+
+# Command in Dockerfile
+	1. from
+		Note: commnad the first in file dockerfile. 
+
+	2. maintainer 
+		Note: define infor of author 
+		EX: MAINTAINER "name author" <"gmail author"> 	
+
+	3.RUN
+		Note:
+		EX: RUN mkdir/folder
+
+	4. ADD
+		4.1. add local file
+			NOTE:
+			EX: ADD data.txt/data.txt
+		4.2. add content of file .tar
+			NOTE: compress file .tar into folder nominated
+			EX: ADD source-code.tar.gz/src/
+		4.3. add file form path 
+			NOTE: 
+			EX: ADD http://web......../data/
+
+	5. ENV	
+		NOTE: 
+		EX: ENV LOG_FOLDER=/app_dirs/logs/
+			ENV HTTPS_PORT=99
+
+	6. ENTRYPOINT and CMD
+
+	7. EXPOSE
+		NOTE: open port
+		EX: EXPOSE 2000
+
+	8. VOLUME
+		NOTE: limit share folder or file between host and container because it can true on my PC but not true on pc other. 
+		EX: VOLUME ["/host/path" "/container/path/"] --> share folder host and container.
+			VOLUME ["/folder/"] --> share folder between container.
+
+	9. WORKDIR
+		NOTE: nominate folder when container run same as command "cd"
+		EX: WORKDIR /temp/ 
+
+	10. USER
+		NOTE: determined account container will run. 
+		EX: USER bob 
