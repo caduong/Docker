@@ -153,6 +153,14 @@
 			  Can add tag for container when commit, here is EX: docker commit d5388hhjdf8 ubuntu-custom-1:v1.0	
 	Rull when set name
 		registry.repo.com:port/organization/image-name:version-tag
+
+	4.Tag for images
+		docker tag "ID images" "Tag change"
+			EX: docker tag 5ff9ded2fd93 caduong/php-custom:v1.0
+	
+	5.Push images
+		docker push "name repository"
+			EX: docker push caduong/php-custom
 --------------------------------------------------------------------
 
 # import and export images
@@ -163,3 +171,18 @@
 	2.Decompress images
 		docker load -i backup-images.tar.gz
 			Note: "-i": input
+--------------------------------------------------------------------
+
+# Volume 
+	1.Host <-> container    
+		docker run -ti -v "Path on HOST":"path on container" ubuntu bash
+			EX: docker run -ti -v /home/caduong/Documents/Learning_Web/Docker/host_data:/container_data ubuntu bash
+
+	2.Container <-> container 
+		docker run -ti --name pc1 -v /share ubuntu bash  --> PC pub
+
+		docker run -ti --name pc2 --volumes-from pc1 ubuntu bash  --> PC sub
+--------------------------------------------------------------------
+
+# Build Dockerfile
+	
