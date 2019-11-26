@@ -76,7 +76,10 @@
 		Note: "IPAddr" is keywork find in all info of container.
 
 	docker rm "ID or name of container" 
-		Note: Must stop container before remove. 
+		Note: Must stop container before remove.
+		
+	docker rm -f "ID or name of container" 
+		Note: remove container and not need stop container.
 
 	docker kill "ID or name of container" 
 --------------------------------------------------------------------
